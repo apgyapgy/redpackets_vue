@@ -1,8 +1,8 @@
 <template>
 	<div class="index">
 		<Heade></Heade>
-		<Swiper :swipers.sync="swipers"></Swiper>
-		<Con></Con>
+		<!--<Swiper :swipers.sync="swipers"></Swiper>-->
+		<Con :types="types"></Con>
 	</div>
 </template>
 
@@ -20,7 +20,8 @@
 		data(){
 			return {
 				swipers:[],
-				goods:[]
+				goods:[],
+				types:[]
 			}
 		},
 		components:{
@@ -49,6 +50,9 @@
 					console.log("success:",res);
 					if(res.images.length>0){
 						that.swipers = res.images;
+					}
+					if(res.types.length){
+						that.types = res.types;
 					}
 				},
 				error:function(res){

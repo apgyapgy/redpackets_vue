@@ -1,99 +1,66 @@
 <template>
-	<div class="content active">
+	<div id="content" class="active">
 		<span class="title"></span>
-		<ul id="list" class="clearfix onclick">
-			<li class="onclick oprStat active" data-url="" data-mid="">
-				<div class="cutdown" data-endtime="">
-					<span class="hour">12</span>
-					<b>:</b>
-					<span class="minutes">12</span>
-					<b>:</b>
-					<span class="seconds">12</span>
-				</div>
-				<div class="img_wrap">
-					<img src="https://static.fuiou.com/sys/o2o/image/coupon/coupon_15016664833492320_m.png" alt="" />
-				</div>
-				<div class="info_wrap">
-					<div class="voucher">
-						<div class="voucher_price"><span>领券</span><b>20元</b></div>
-						<div class="buy_price">券后价:￥<b class="yuan">9</b><b class="float">.99</b></div>
+		<div v-for="ty in types"  class="con">
+			<img class="title onclick oprStat" :src="joinImgUrl(ty.images.imgUrl)"/>
+			<ul class="list clearfix onclick">
+				<li class="onclick oprStat active" data-url="" data-mid="">
+					<div class="cutdown" data-endtime="">
+						<span class="hour">12</span>
+						<b>:</b>
+						<span class="minutes">12</span>
+						<b>:</b>
+						<span class="seconds">12</span>
 					</div>
-					<div class="name">我就是来测试的，测试的</div>
-					<span class="solded">已售<b>369</b>件</span>
-				</div>
-			</li>
-			<li class="onclick oprStat active" data-url="" data-mid="">
-				<div class="cutdown" data-endtime="">
-					<span class="hour">12</span>
-					<b>:</b>
-					<span class="minutes">12</span>
-					<b>:</b>
-					<span class="seconds">12</span>
-				</div>
-				<div class="img_wrap">
-					<img src="https://static.fuiou.com/sys/o2o/image/coupon/coupon_15017253244811618_m.png" alt="" />
-				</div>
-				<div class="info_wrap">
-					<div class="voucher">
-						<div class="voucher_price"><span>领券</span><b>20元</b></div>
-						<div class="buy_price">券后价:￥<b class="yuan">9</b><b class="float">.99</b></div>
+					<div class="img_wrap">
+						<img src="https://static.fuiou.com/sys/o2o/image/coupon/coupon_15016664833492320_m.png" alt="" />
 					</div>
-					<div class="name">我就是来测试的，测试的</div>
-					<span class="solded">已售<b>369</b>件</span>
-				</div>
-			</li>
-			<li class="onclick oprStat active" data-url="" data-mid="">
-				<div class="cutdown" data-endtime="">
-					<span class="hour">12</span>
-					<b>:</b>
-					<span class="minutes">12</span>
-					<b>:</b>
-					<span class="seconds">12</span>
-				</div>
-				<div class="img_wrap">
-					<img src="https://static.fuiou.com/sys/o2o/image/coupon/coupon_15016660967234786_m.png" alt="" />
-				</div>
-				<div class="info_wrap">
-					<div class="voucher">
-						<div class="voucher_price"><span>领券</span><b>20元</b></div>
-						<div class="buy_price">券后价:￥<b class="yuan">9</b><b class="float">.99</b></div>
+					<div class="info_wrap">
+						<div class="voucher">
+							<div class="voucher_price"><span>领券</span><b>20元</b></div>
+							<div class="buy_price">券后价:￥<b class="yuan">9</b><b class="float">.99</b></div>
+						</div>
+						<div class="name">我就是来测试的，测试的</div>
+						<span class="solded">已售<b>369</b>件</span>
 					</div>
-					<div class="name">我就是来测试的，测试的</div>
-					<span class="solded">已售<b>369</b>件</span>
-				</div>
-			</li>
-			<li class="onclick oprStat active" data-url="" data-mid="">
-				<div class="cutdown" data-endtime="">
-					<span class="hour">12</span>
-					<b>:</b>
-					<span class="minutes">12</span>
-					<b>:</b>
-					<span class="seconds">12</span>
-				</div>
-				<div class="img_wrap">
-					<img src="https://static.fuiou.com/sys/o2o/image/coupon/coupon_15015585449451091_m.png" alt="" />
-				</div>
-				<div class="info_wrap">
-					<div class="voucher">
-						<div class="voucher_price"><span>领券</span><b>20元</b></div>
-						<div class="buy_price">券后价:￥<b class="yuan">9</b><b class="float">.99</b></div>
-					</div>
-					<div class="name">我就是来测试的，测试的</div>
-					<span class="solded">已售<b>369</b>件</span>
-				</div>
-			</li>
-		</ul>
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
 <script>
 	export default{
-		
+		props:{
+			types:{
+				type:Array
+			}
+		},
+		created(){
+			if(this.types){
+				console.log("types:",this.types);
+			}
+		},
+		methods:{
+			joinImgUrl:function(_url){
+				console.log(_url);
+				return "https://static.fuiou.com/sys/o2o/"+_url;
+			}
+		},
+		mounted(){
+			if(this.types){
+				console.log("mounted types:",this.types);
+			}
+		},
+		computed:{
+			
+		}
 	}
 </script>
 
 <style lang="less" scoped>
-	.content{
+	/*content*/
+	#content{
 		display:none;
 		width:100%;
 		&.active{
@@ -102,15 +69,15 @@
 		.title{
 			display:block;
 			width:100%;
-			height:1.3rem;
-			background:url("https://static.fuiou.com/sys/o2o/redpackets/img/redpackets/title.png") no-repeat center;
-			background-size:2.86rem 0.98rem;
+			height:auto;
+			margin-bottom:0.1rem;
 		}
-		#list{
+		.list{
 			padding-left:0.1rem;
 			width:100%;
 			box-sizing:border-box;
 			li{
+				display:none;
 				position:relative;
 				float:left;
 				padding-right:0.1rem;
@@ -118,6 +85,9 @@
 				width:50%;
 				height:5.16rem;
 				box-sizing:border-box;
+				&.active{
+					display:block;
+				}
 				.img_wrap{
 					width:100%;
 					height:4rem;
@@ -174,17 +144,18 @@
 						.voucher_price{
 							float:left;
 							display:flex;
-							margin-top:0.14rem;
+							margin-top:0.12rem;
 							min-width:1.3rem;
-							height:0.3rem;
+							height:0.32rem;
 							background:#e40528;
 							border-radius:0.05rem;
 							font-size:0.24rem;
 							color:#fff;
+							align-items:center;
 							span{
 								padding:0 0.05rem;
-								height:0.3rem;
-								line-height:0.3rem;
+								height:0.32rem;
+								line-height:0.32rem;
 								text-align:center;
 								flex:1;
 							}
@@ -197,7 +168,7 @@
 								color:#e40528;
 								border-radius:0.05rem;
 								text-align:center;
-								margin:0.02rem 0.02rem 0 0;
+								margin-right:0.02rem;
 							}
 						}
 						.buy_price{
@@ -211,25 +182,73 @@
 							}
 						}
 					}
-				}
-				.name{
-					width:100%;
-					height:0.6rem;
-					overflow:hidden;
-					line-height:0.3rem;
-					font-size:0.24rem;
-					text-align:left;
-					font-family:"HiraginoSansGB W3";
-					color:#666;
-				}
-				.solded{
-					position:absolute;
-					bottom:0.04rem;
-					right:0.06rem;
-					color:#999;
-					font-size:0.2rem;
+					.name{
+						width:100%;
+						height:0.6rem;
+						overflow:hidden;
+						line-height:0.3rem;
+						font-size:0.24rem;
+						font-family:"HiraginoSansGB W3";
+						color:#666;
+						word-break:break-all;
+						text-align:left;
+					}
+					.solded{
+						position:absolute;
+						bottom:0.04rem;
+						right:0.15rem;
+						color:#999;
+						font-size:0.2rem;
+					}
 				}
 			}
 		}
 	}
 </style>
+
+<!--for(var i = 0;i < _types.length;i++){
+	var _lists = _types[i].groupons;
+	var _domstr = '<div class="con"><img class="title onclick oprStat" data-mid="'+_types[i].tpName+'" data-url="'+_types[i].images.linkUrl+'" src="'+(_imgPre+_types[i].images.imgUrl)+'"/><ul class="list clearfix onclick">';
+	for(var j = 0;j < _lists.length;j++){
+		var _dt = _lists[j].dueTm?_lists[j].dueTm.time:new Date().getTime();//倒计时时间
+		var _oprice = _lists[j]["oprice"],_gprice =_lists[j]["gprice"];//oprice原价，gprice券后价
+		//原价-券后价  =》 优惠券价
+		var _qprice = Math.abs((_oprice - _gprice)/100);
+		_gprice /= 100;
+		if(Math.abs(_gprice) > Math.abs(parseInt(_gprice))){//券后价有小数  10分=0.1元
+			var numToStr = "" + _gprice;
+			var _floatPrice = numToStr.substring(numToStr.indexOf(".")+1);
+			_opstr = '<b class="yuan">'+parseInt(_gprice)+'</b><b class="float">.'+_floatPrice+'</b>'
+		}else{
+			_opstr = '<b class="yuan">'+_gprice+'</b>';
+		}
+		if(_lists[j]['images'].length){
+			var _imgStr = '<img class="lazy" data-original="'+(_imgPre+_lists[j]["images"][0]["imgUrl"])+'">';
+		}else{
+			_imgStr = '<img class="lazy" data-original="">';
+		}
+		var _solded = _lists[j].stock>10000?(parseInt(_lists[j].stock/1000)/10)+"万":_lists[j].stock;
+		_domstr += '<li class="onclick oprStat active" data-url="'+_lists[j].outLinkUrl+'" data-mid="'+_lists[j].grouponId+'">'
+					+'<div class="cutdown" data-endtime="'+_dt+'">'
+						+'<span class="hour"></span>'
+						+'<b>:</b>'
+						+'<span class="minutes"></span>'
+						+'<b>:</b>'
+						+'<span class="seconds"></span>'
+					+'</div>'
+					+'<div class="img_wrap">'
+						+_imgStr
+					+'</div>'
+					+'<div class="info_wrap">'
+						+'<div class="voucher">'
+							+'<div class="voucher_price"><span>领券</span><b>'+_qprice+'元</b></div>'
+							+'<div class="buy_price">券后价:￥'+_opstr+'</div>'
+						+'</div>'
+						+'<div class="name">'+_lists[j].title+'</div>'
+						+'<span class="solded">已售<b>'+_solded+'</b>件</span>'
+					+'</div>'
+				+'</li>';
+	}
+	_domstr += '</ul></div>';
+	_domArr.push(_domstr);
+}-->
