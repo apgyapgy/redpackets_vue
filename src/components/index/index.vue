@@ -2,7 +2,7 @@
 	<div class="index">
 		<Heade></Heade>
 		<div class="padding"></div>
-		<!--<Swiper :swipers.sync="swipers"></Swiper>-->
+		<Swiper :swipers="swipers"></Swiper>
 		<Con :types="types"></Con>
 	</div>
 </template>

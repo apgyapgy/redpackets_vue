@@ -1,21 +1,27 @@
 <template>
-  	<swiper :options="swiperOption" :class="swiperSlides.length>0?'active':''">
-    	<swiper-slide v-for="{slide,index} in swipers" :key="slide">
-    		<!--<span data-md='{slide.imgUrl}'>{{slide.linkUrl}}</span>-->
-    		{{slide.imgUrl}}
-    		<!--<image :src='slide.imgUrl'/>-->
+	<div class="swiper-container" :class="swiperSlides.length>0?'active':''">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide" v-for="slide in swipers">
+				<image :src='joinImgUrl(slide.imgUrl)'/>
+			</div>
+		</div>
+	</div>
+  	<!--<swiper class="swiperWrapper" :options="swiperOption" :class="swiperSlides.length>0?'active':''">
+    	<swiper-slide v-for="slide in swipers">
+    		<image :src='joinImgUrl(slide.imgUrl)'/>
     	</swiper-slide>
     	<div class="swiper-pagination" slot="pagination"></div>
-  	</swiper>
+  	</swiper>-->
 </template>
 
 <script>
+//	import Vue from 'vue';
+//	import VueAwesomeSwiper from 'vue-awesome-swiper';
+//	Vue.use(VueAwesomeSwiper);
   	export default {
     	name: 'carrousel',
     	props:{
-    		swipers:{
-    			type:Object
-    		}
+    		swipers:Array
     	},
     	data() {
 	      	return {
@@ -37,6 +43,12 @@
         		let swiperSlides = this.swiperSlides
         		if (swiperSlides.length < 10) swiperSlides.push(swiperSlides.length + 1)
       		}, 3000);*/
+    	},
+    	methods:{
+    		joinImgUrl:function(_url){
+    			console.log("join:",this.swipers)
+    			return "https://static.fuiou.com/sys/o2o/"+_url;
+    		}
     	},
     	created(){
     	}
