@@ -4,24 +4,18 @@
 		<div v-for="ty in types"  class="con">
 			<img class="title onclick oprStat" :src="joinImgUrl(ty.images.imgUrl)"/>
 			<ul class="list clearfix onclick">
-				<li class="onclick oprStat active" data-url="" data-mid="">
-					<div class="cutdown" data-endtime="">
-						<span class="hour">12</span>
-						<b>:</b>
-						<span class="minutes">12</span>
-						<b>:</b>
-						<span class="seconds">12</span>
-					</div>
+				<li v-for="list in ty.groupons" class="onclick oprStat active" data-url="list.images[0].linkUrl" data-mid="">
+					<Cutdown :endtime="list.dueTm?list.dueTm.time:new Date().getTime()"></Cutdown>
 					<div class="img_wrap">
-						<img src="https://static.fuiou.com/sys/o2o/image/coupon/coupon_15016664833492320_m.png" alt="" />
+						<img :src="joinImgUrl(list.images[0].imgUrl)" alt="" />
 					</div>
 					<div class="info_wrap">
 						<div class="voucher">
-							<div class="voucher_price"><span>领券</span><b>20元</b></div>
-							<div class="buy_price">券后价:￥<b class="yuan">9</b><b class="float">.99</b></div>
+							<div class="voucher_price"><span>领券</span><b>{{couponPrice(list.gprice,list.oprice)}}元</b></div>
+							<div class="buy_price">券后价:￥<b class="yuan">{{priceYuan(list.gprice)}}</b><b v-show="priceFloat(list.gprice)" class="float">{{(''+priceFloat(list.gprice)).substring(1)}}</b></div>
 						</div>
-						<div class="name">我就是来测试的，测试的</div>
-						<span class="solded">已售<b>369</b>件</span>
+						<div class="name">{{list.title}}</div>
+						<span class="solded">已售<b>{{computeSolded(list.stock)}}</b>件</span>
 					</div>
 				</li>
 			</ul>
@@ -30,6 +24,7 @@
 </template>
 
 <script>
+	import Cutdown from 'components/cutdown/cutdown';
 	export default{
 		props:{
 			types:{
@@ -43,8 +38,29 @@
 		},
 		methods:{
 			joinImgUrl:function(_url){
-				console.log(_url);
 				return "https://static.fuiou.com/sys/o2o/"+_url;
+			},
+			computeSolded:function(_num){
+				_num -= 0;
+				if(_num > 10000){
+					return (parseInt(_num/1000))/10 + '万';
+				}
+				return _num;
+			},
+			couponPrice:function(gp,op){
+				return (op - gp)/100;
+			},
+			priceYuan:function(gp){
+				return parseInt(gp/100);
+			},
+			priceFloat:function(gp){
+				var _float = gp - parseInt(gp/100)*100;
+				_float /= 100;
+				if(_float == 0){
+					return 0;
+				}else{
+					return  _float;
+				}
 			}
 		},
 		mounted(){
@@ -52,8 +68,8 @@
 				console.log("mounted types:",this.types);
 			}
 		},
-		computed:{
-			
+		components:{
+			Cutdown
 		}
 	}
 </script>

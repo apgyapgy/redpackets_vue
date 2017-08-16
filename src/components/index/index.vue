@@ -1,6 +1,7 @@
 <template>
 	<div class="index">
 		<Heade></Heade>
+		<div class="padding"></div>
 		<!--<Swiper :swipers.sync="swipers"></Swiper>-->
 		<Con :types="types"></Con>
 	</div>
@@ -71,5 +72,9 @@
 	}
 </script>
 
-<style>
+<style lang="less" scoped>
+	.padding{
+		width:100%;
+		height:.8rem;
+	}
 </style>

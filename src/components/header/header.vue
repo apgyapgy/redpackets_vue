@@ -13,12 +13,15 @@
 
 <style lang="less" scoped>
 	.header{
-		position:relative;
+		position:fixed;
+		left:0;
+		top:0;
 		width:100%;
 		height:0.8rem;
 		line-height:0.8rem;
 		color:#fff;
 		background:#e40528;
+		z-index:10;
 		.back{
 			position:absolute;
 			left:0;
