@@ -1,6 +1,6 @@
 <template>
 	<swiper :options="swiperOption" ref='swi'>
-	    <swiper-slide v-for="slide in swipers" :key = "slide">
+	    <swiper-slide v-for="slide in swipers" :key = "slide.id">
 	    	<img :src="joinImgUrl(slide.imgUrl)"/>
 	    </swiper-slide>
 	    <div class="swiper-pagination" slot="pagination"></div>
