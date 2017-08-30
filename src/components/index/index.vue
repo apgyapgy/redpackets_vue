@@ -4,6 +4,7 @@
 		<div class="padding"></div>
 		<Swiper :swipers="swipers"></Swiper>
 		<Con :types="types"></Con>
+		<Top :showTop="showTop"></Top>
 	</div>
 </template>
 
@@ -12,6 +13,7 @@
 	import Header from "components/header/header";
 	import Swiper from 'components/swiper/swiper';
 	import Content from 'components/content/content';
+	import Top from 'components/top/top';
 	import qs from 'qs';
 	import $$ from 'jquery';
 	
@@ -22,13 +24,32 @@
 			return {
 				swipers:[],
 				goods:[],
-				types:[]
+				types:[],
+				showTop:false,
+				outerHeight:window.outerHeight
 			}
 		},
 		components:{
 			'Heade':Header,
 			Swiper,
-			'Con':Content
+			'Con':Content,
+			Top
+		},
+		methods:{
+			handleScroll:function(e){
+				if(window.scrollY > this.outerHeight){
+					if(this.showTop == false){
+						this.showTop = true;
+					}
+				}else{
+					if(this.showTop == true){
+						this.showTop = false;
+					}
+				}
+			}
+		},
+		mounted(){
+			window.addEventListener('scroll',this.handleScroll);
 		},
 		created:function(){
 			var that = this;
