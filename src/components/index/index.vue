@@ -62,6 +62,7 @@
 					"networkTp":1,
 					"userId":'13625625040'
 				},
+				timeout:20000,
 				jsonp:'jsonpCallback'
 			}).then(function(res){
 				res = res.body;
