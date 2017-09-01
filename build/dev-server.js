@@ -75,6 +75,7 @@ devMiddleware.waitUntilValid(() => {
   console.log('> Listening at ' + uri + '\n')
   // when env is testing, don't need open it
   if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {
+  	console.log("uri:",uri);
     opn(uri)
   }
   _resolve()
